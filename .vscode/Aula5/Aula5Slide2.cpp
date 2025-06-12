@@ -1,6 +1,9 @@
-#include <iostream>
+#include <bits/stdc++.h>
  using namespace std;
- int main()
+ 
+ 
+ 
+ /*int main()
  {
  int num, soma;
  soma = 0; // inicializa acumulador
@@ -15,4 +18,27 @@
  }
  cout << "Soma total: " << soma;
  return 0;
+ }*/
+
+ void func(float produto, float valor){
+    
+    float total;
+    while (produto > 0){
+        
+        cout << "Para finalizar, digite 0" << endl;
+       
+       
+        cin >> produto;
+        cin >> valor;
+        total = total + (produto*valor);
+        cout << "Subtotal: " << total << endl;
+    }
+    
+    cout << "O total a ser pago é: " << total << endl;
+ }
+
+ int main(){
+float produto,valor;
+cin >> produto >> valor;
+func(produto,valor);
  }
