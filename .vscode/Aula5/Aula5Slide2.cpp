@@ -67,7 +67,7 @@ cout << "media é : " << penes;
  float fatorial(int valor){
     int cont;
     int p=1;
-    for(cont =2 ; cont < valor; cont++){
+    for(cont =2 ; cont <= valor; cont++){
  p = p*cont;
 
 
@@ -79,5 +79,5 @@ return p;
     int valor, penes;
     cin >> valor;
     penes = fatorial(valor);
-    cout << penes ;
+    cout << penes << endl ;
  }
