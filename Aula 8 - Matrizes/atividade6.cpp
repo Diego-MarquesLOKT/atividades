@@ -2,7 +2,7 @@
 using namespace std;
 
 float menor(float mat[5][4]){
-    float menornum= 0;
+    float menornum= m[0][0];
     for(int i = 0; i < 5;i++){
 
         for(int j = 0; j< 4; j++){
