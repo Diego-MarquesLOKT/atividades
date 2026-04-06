@@ -28,7 +28,7 @@ using namespace std;
 
 }*/
 
-int* intercala(int n, int v1[], int v2[])
+/*int* intercala(int n, int v1[], int v2[])
 {
     int *resultado = new int[n];
 
@@ -47,7 +47,33 @@ int* intercala(int n, int v1[], int v2[])
 
     return resultado;
 
+}*/
+
+
+
+void acimaDaMedia(int n)
+{
+  float valores = 0;
+  float media = 0;
+  int *vet = new int[n];
+  cout << "Digite os valores: ";
+  for(int i = 0; i < n; i++){
+    cin >> valores;
+    *(vet + i) = valores;
+    media += valores;
+  }
+  media = media/n;
+  cout << "Media: " << media << endl;
+   for(int i = 0; i < n; i++){
+    if(*(vet + i) > media)
+    {
+        cout << "Valor acima da media: " << *(vet + i) << endl;
+    }
+  }
+
+    delete [] vet;
 }
+
 
 
 int main() {
@@ -71,6 +97,7 @@ int main() {
     cout << "Menor: " << menor << endl;
 
 */
+ /*
     int n;
     cout << "Digite o tamanho do vetor: " ;
     cin >> n;
@@ -101,7 +128,12 @@ for(int i =0 ; i < n;i++)
     }
     delete [] vetInter;
     delete [] v1;
-    delete [] v2;
+    delete [] v2;*/
+
+    int n = 0;
+    cout << "Digite quantos valores quer fazer: ";
+    cin >> n;
+    acimaDaMedia(n);
 
     return 0;
 }
