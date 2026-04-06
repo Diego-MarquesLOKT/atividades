@@ -1,0 +1,108 @@
+#include <iostream>
+
+using namespace std;
+
+/*void leValores(int n, int *soma, int *media,int *maior, int *menor)
+{
+    int valor;
+    cout << "Digite os valores: " << endl;
+    cin >> valor;
+    *soma = valor;
+    *media = 0;
+     *maior = valor;
+    *menor = valor;
+    for ( int i = 0; i < n-1; i++){
+            cin >> valor;
+        *soma += valor;
+        if( *maior < valor)
+        {
+            *maior = valor;
+        }
+        if(*menor > valor)
+        {
+            *menor = valor;
+        }
+    }
+
+    *media = *soma/n;
+
+}*/
+
+int* intercala(int n, int v1[], int v2[])
+{
+    int *resultado = new int[n];
+
+    for(int i = 0; i < 2*n;i++)
+    {
+        if(i%2==0){
+            *(resultado + i) = *(v1 +(i/2));
+
+           } else{
+            *(resultado + i) = *(v2+(i/2));
+
+            }
+
+
+    }
+
+    return resultado;
+
+}
+
+
+int main() {
+  /*  int n, soma, maior, menor;
+    int media;
+
+    cout << "Quantos valores deseja ler? ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Número inválido!" << endl;
+        return 1;
+    }
+
+    leValores(n, &soma, &media, &maior, &menor);
+
+    cout << "\n--- Resultados ---" << endl;
+    cout << "Soma: " << soma << endl;
+    cout << "Média: " << media << endl;
+    cout << "Maior: " << maior << endl;
+    cout << "Menor: " << menor << endl;
+
+*/
+    int n;
+    cout << "Digite o tamanho do vetor: " ;
+    cin >> n;
+    int *v1;
+    int *v2;
+    int *vetInter;
+    v1 = new int[n];
+    v2 = new int[n];
+
+    cout << "Digite os valores do vetor 1: " << endl;
+    for(int i =0 ; i < n;i++)
+    {
+     cin >> v1[i];
+
+    }
+ cout << "Digite os valores do vetor 2: " << endl;
+    for(int i =0 ; i < n;i++)
+    {
+     cin >> v2[i];
+
+    }
+    vetInter = intercala(n,v1,v2);
+
+for(int i =0 ; i < n;i++)
+    {
+     cout << vetInter[i] << " ";
+
+    }
+    delete [] vetInter;
+    delete [] v1;
+    delete [] v2;
+
+    return 0;
+}
+
