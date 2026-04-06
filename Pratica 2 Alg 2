@@ -38,10 +38,10 @@ int* redimensiona(int vet[], int tam,int novo)
     if(tam == novo || tam > novo){
         return vet;
     }else{
-    
-    
+
+
     }
-    
+
 
 
 }
@@ -112,15 +112,15 @@ int main()
     for(int i = 0;i < num/2;i++){
         cout << "Indice " << i << " valor: " << vetPares[i] << endl;
     }
-    
+
     delete [] vetPares;
     */
-    
+
 
     //TEM ALGO ERRADO!!!! ARRUMAR
-    
-    //ATIVIDADE 4
 
+    //ATIVIDADE 4
+/*
     int n1;
     cout << "Digite o tamanho do primeiro vetor: " << endl;
     cin >> n1;
@@ -128,11 +128,36 @@ int main()
     cout << "Digite o tamanho do proximo vetor: " << endl;
     int n2;
     cin >> n2;
-    
-        int *novovetor = redimensiona(vetor,n1,n2);
-    
-    
-    
+
+        int *novovetor = redimensiona(vetor,n1,n2);*/
+
+
+    int **mat;
+    int n;
+
+    cout << "Digitar ordem: ";
+
+    cin >> n;
+
+    mat = new int*[n];
+
+for(int i=0; i < n;i++){
+        mat[i] =new int[n];
+    }
+
+    cout << "Digite os elementos da matriz: " << endl;
+    for(int i=0;i < n; i++){
+        for(int j =0; j < n; j++){
+            cout << "mat[" <<i << "][" << j << "]";
+            cin >>mat[i][j];
+        }
+        cout << endl;
+    }
+    for(int i=0; i < n;i++){
+        delete mat[i];
+    }
+    delete [] mat;
+
 
     return 0;
 }
