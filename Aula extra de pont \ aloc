@@ -55,6 +55,7 @@ void acimaDaMedia(int n)
 {
   float valores = 0;
   float media = 0;
+  int qnt = 0;
   int *vet = new int[n];
   cout << "Digite os valores: ";
   for(int i = 0; i < n; i++){
@@ -67,10 +68,11 @@ void acimaDaMedia(int n)
    for(int i = 0; i < n; i++){
     if(*(vet + i) > media)
     {
+        qnt++;
         cout << "Valor acima da media: " << *(vet + i) << endl;
     }
   }
-
+    cout << "Quantidade acima da media: " << qnt;
     delete [] vet;
 }
 
