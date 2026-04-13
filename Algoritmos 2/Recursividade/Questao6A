@@ -1,0 +1,24 @@
+#include <iostream>
+
+using namespace std;
+
+
+float harmonico(int n)
+{
+    if (n == 1){
+        return 1;
+    }else{
+    return harmonico(n-1) + 1.0/n;
+    }
+}
+
+
+int main()
+{
+    cout << "Digita o numero que tu quer o valor harmonico: " << endl;
+    int n;
+    cin >> n;
+    cout << harmonico(n);
+
+  return 0;
+}
