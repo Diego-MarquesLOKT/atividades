@@ -1,0 +1,32 @@
+#include <iostream>
+
+using namespace std;
+
+int modulo(int x, int y)
+{
+    if(x == y)
+    {
+        return 0;
+    }
+    if(x < y)
+    {
+    return x;
+    }else
+    {
+    return modulo(x-y,y);
+    }
+}
+
+int main()
+{
+
+  cout << "Calcular o modulo de um numero sla foda se fala o numero que ce quer (num/den): " << endl;
+    int n = 0;
+    cin >> n;
+    int dom = 0;
+    cin >> dom;
+    cout << "O modulo dele atraves da operação é (valor esperado): " << n%dom << endl;
+    cout << "Valor da recursividade: " << modulo(n,dom);
+
+  return 0;
+}
