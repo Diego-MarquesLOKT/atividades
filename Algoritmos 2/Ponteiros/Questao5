@@ -1,0 +1,26 @@
+#include <iostream>
+
+using namespace std;
+
+void divisao(int num, int div, int *q, int *r)
+{
+    *q = num/div;
+    *r = num%div;
+}
+
+
+int main()
+{
+        int num;
+        int div;
+        int q = 0;
+        int r = 0;
+    cout << "Qual vai ser o numerador?" << endl;
+    cin >> num;
+    cout << "Qual vai ser o divisor?" << endl;
+    cin >> div;
+    divisao(num,div,&q,&r);
+    cout << "O quociente da divisão é: " << q << endl;
+    cout << "O resto da divisão é: " << r << endl;
+    return 0;
+}
