@@ -1,0 +1,122 @@
+#include <iostream>
+
+using namespace std;
+
+// ========================================================================
+// PROVA SIMULADA - ALGORITMOS II - TVC 1
+// ========================================================================
+
+//Q1
+void q1() {
+    int *vet = new int[5];
+    *(vet) = 10;
+    *(vet + 1) = 20;
+    *(vet + 2) = 30;
+    *(vet + 3) = 40;
+    *(vet + 4) = 50;
+    int *p = &vet[4];
+    cout <<"Valor atual de p: " << *p << endl;
+   for(int i = 0; i < 5; i++) {
+    cout << *p << " ";
+    p--;
+}
+    delete [] vet;
+}
+//-Q1
+
+
+//Q2
+int* filtraMaiores(int vet[], int n, int x, int *novoTamanho) {
+    for(int i = 0; i < n;i++)
+    {
+        if(vet[i] > x)
+        {
+            (*novoTamanho)++;
+        }
+    }
+        if(*novoTamanho <= 0)
+        {
+            *novoTamanho = 0;
+        return NULL;
+        }
+        int *vetm = new int[*novoTamanho];
+        int j = 0;
+        for(int i = 0; i < n;i++)
+    {
+        if(vet[i] > x)
+        {
+            *(vetm + j) = vet[i];
+            j++;
+        }
+    }
+    return vetm;
+}
+//-Q2
+
+
+//Q3
+int somaDigitosPares(int n) {
+    if(n == 0) {
+        return 0; // Caso base
+    }
+
+    int digito = n % 10;
+
+    if(digito % 2 == 0) {
+        return digito + somaDigitosPares(n / 10); // É par, soma o dígito
+    } else {
+        return somaDigitosPares(n / 10); // É ímpar, ignora o dígito
+    }
+}
+//-Q3
+
+
+//Q4
+int contaOcorrencias(int vet[], int n, int x) {
+    // Caso base: vetor vazio
+    if(n == 0) {
+        return 0;
+    }
+    
+    // Verifica o ÚLTIMO elemento atual (índice n-1)
+    if(vet[n - 1] == x) {
+        return 1 + contaOcorrencias(vet, n - 1, x);
+    } else {
+        return contaOcorrencias(vet, n - 1, x);
+    }
+}
+//-Q4
+
+
+// ========================================================================
+// FUNÇÃO MAIN (Use para testar as suas implementações)
+// ========================================================================
+int main() {
+    cout << "--- Testando Q1 ---" << endl;
+    q1();
+    cout << endl;
+
+    cout << "--- Testando Q2 ---" << endl;
+    int v[6] = {2, 8, 3, 10, 1, 9};
+    int novoTam = 0;
+    int* novoVetor = filtraMaiores(v, 6, 5, &novoTam);
+    cout << "Tamanho do novo vetor: " << novoTam << endl;
+    cout << "Elementos maiores que 5: ";
+    if(novoVetor != NULL) {
+        for(int i=0; i<novoTam; i++) cout << novoVetor[i] << " ";
+        delete[] novoVetor; // Liberando a memória no main
+    } else {
+        cout << "Nenhum valor encontrado.";
+    }
+    cout << "\n\n";
+
+    cout << "--- Testando Q3 ---" << endl;
+    cout << "Soma dos digitos pares de 834: " << somaDigitosPares(834) << " (Esperado: 12)" << endl;
+    cout << "\n";
+
+    cout << "--- Testando Q4 ---" << endl;
+    int v2[7] = {7, 2, 7, 4, 7};
+    cout << "Ocorrencias do numero 7: " << contaOcorrencias(v2, 5, 7) << " (Esperado: 3)" << endl;
+
+    return 0;
+}
