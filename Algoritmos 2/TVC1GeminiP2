@@ -1,0 +1,123 @@
+#include <iostream>
+
+using namespace std;
+
+// ========================================================================
+// PROVA SIMULADA 2 - ALGORITMOS II - TVC 1
+// ========================================================================
+
+//Q1
+void q1() {
+  int v[6] = {10, 20, 30, 40, 50, 60};
+  int *p1 = &v[0];
+  int *p2= &v[5];
+  while(p1 < p2)
+  {
+      int temp = *p1;
+      *p1 = *p2;
+      *p2 = temp;
+
+      p1++;
+      p2--;
+  }
+
+  for (int i = 0;i < 6;i++)
+  {
+      cout << v[i] << " ";
+  }
+
+}
+//-Q1
+
+
+//Q2
+int* extrairImpares(int vet[], int n, int *tamImpares) {
+    *tamImpares = 0;
+    for(int i = 0; i < n; i++)
+    {
+        if(vet[i]%2 != 0)
+        {
+            (*tamImpares)++;
+        }
+    }
+    if(*tamImpares <= 0)
+    {
+        return NULL;
+    }
+    int j = 0;
+    int *vetImpar = new int [*tamImpares];
+    for(int i = 0; i < n;i++)
+    {
+         if(vet[i]%2 != 0)
+        {
+            *(vetImpar + j) = vet[i];
+            j++;
+        }
+    }
+
+   return vetImpar;
+}
+//-Q2
+
+
+//Q3
+float harmonico(int n) {
+    if(n==1)
+    {
+        return 1.0;
+    }
+    return 1.0/n + harmonico(n-1);
+}
+//-Q3
+
+
+//Q4
+int somaPositivos(int vet[], int n) {
+    if(n == 0)
+    {
+        return 0;
+    }
+    if(vet[n-1]>0)
+    {
+        return vet[n - 1] + somaPositivos(vet,n-1);
+    }else{
+        return somaPositivos(vet,n-1);
+    }
+
+}
+//-Q4
+
+
+// ========================================================================
+// FUNÇÃO MAIN (Use para testar as suas implementações)
+// ========================================================================
+int main() {
+    cout << "--- Testando Q1 ---" << endl;
+    q1();
+    cout << "\n\n";
+
+    cout << "--- Testando Q2 ---" << endl;
+    int v2[7] = {2, 7, 4, 9, 1, 6, 8};
+    int tamImp = 0;
+    int* vetImpares = extrairImpares(v2, 7, &tamImp);
+    cout << "Quantidade de impares: " << tamImp << endl;
+    cout << "Vetor de impares: ";
+    if(vetImpares != NULL) {
+        for(int i=0; i<tamImp; i++) cout << vetImpares[i] << " ";
+        delete[] vetImpares;
+    } else {
+        cout << "Nenhum impar encontrado.";
+    }
+    cout << "\n\n";
+
+    cout << "--- Testando Q3 ---" << endl;
+    cout << "Harmonico de 3: " << harmonico(3) << " (Esperado aprox: 1.8333)" << endl;
+    cout << "Harmonico de 5: " << harmonico(5) << " (Esperado aprox: 2.2833)" << endl;
+    cout << "\n";
+
+    cout << "--- Testando Q4 ---" << endl;
+    int v4[6] = {-5, 10, -2, 4, 1, -8};
+    cout << "Soma dos positivos: " << somaPositivos(v4, 6) << " (Esperado: 15)" << endl;
+
+    return 0;
+}
