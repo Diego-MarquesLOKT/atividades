@@ -1,0 +1,161 @@
+#include <iostream>
+
+using namespace std;
+
+// ========================================================================
+// PROVA SIMULADA 4 - ALGORITMOS II - TVC 1
+// ========================================================================
+
+//Q1
+void trocaVetores(int *vetA, int *vetB, int tam) {
+    for(int i = 0; i < tam;i++)
+    {
+        int temp = *(vetA + i);
+        *(vetA + i) = *(vetB + i);
+        *(vetB + i) = temp;
+    }
+}
+//-Q1
+
+
+//Q2
+int* removeVal(int vet[], int n, int val, int *novoTamanho) {
+    *novoTamanho = 0;
+    for(int i = 0;i < n;i++)
+    {
+            if(vet[i] != val)
+            {
+                (*novoTamanho)++;
+            }
+    }
+    if(*novoTamanho <= 0)
+    {
+        return NULL;
+    }
+    int *vetnovo = new int [*novoTamanho];
+    int j = 0;
+    for(int i = 0; i < n;i++)
+    {
+            if(vet[i] != val)
+            {
+              *(vetnovo + j) = vet[i];
+              j++;
+            }
+    }
+    return vetnovo;
+}
+//-Q2
+
+
+//Q3
+float pot(float x, int n) {
+    if(n == 0)
+    {
+        return 1.0;
+    }
+    else if(n < 0)
+    {
+        return pot(1.0/x,-n);// corrigido!
+    }else
+    {
+        return x*pot(x,n-1);
+    }
+
+}
+//-Q3
+
+
+//Q4
+/*int iguais(int vet1[], int vet2[], int n) {
+   if(n == 0)
+   {
+       return -1;
+   }else if(vet1[n-1] != vet2[n-1])
+    {
+        return n-1;
+    }else
+    {
+    return iguais(vet1,vet2,n-1);
+    }
+
+
+}*/
+
+
+//CORREÇÃO!
+int iguais(int vet1[], int vet2[], int n) {
+   if(n == 0) return -1;
+
+   // Primeiro, procura nas posições anteriores (da esquerda)
+   int pos = iguais(vet1, vet2, n-1);
+
+   if(pos != -1) {
+       return pos; // Se achou diferença lá atrás, retorna ela
+   } else if (vet1[n-1] != vet2[n-1]) {
+       return n-1; // Se lá atrás tava tudo igual, testa a posição atual
+   } else {
+       return -1; // Tudo igual
+   }
+}
+//-Q4
+
+
+// ========================================================================
+// FUNÇÃO MAIN COM MÚLTIPLOS TESTES
+// ========================================================================
+int main() {
+    cout << "============== TESTANDO Q1 ==============" << endl;
+    int A1[] = {1, 2, 3};
+    int B1[] = {4, 5, 6};
+    trocaVetores(A1, B1, 3);
+    cout << "Teste 1 - VetA: " << A1[0] << " " << A1[1] << " " << A1[2] << " | (Esperado: 4 5 6)" << endl;
+    cout << "Teste 1 - VetB: " << B1[0] << " " << B1[1] << " " << B1[2] << " | (Esperado: 1 2 3)" << endl;
+
+    int A2[] = {-1};
+    int B2[] = {99};
+    trocaVetores(A2, B2, 1);
+    cout << "Teste 2 - VetA: " << A2[0] << " VetB: " << B2[0] << " | (Esperado: VetA: 99 VetB: -1)" << endl;
+
+
+    cout << "\n============== TESTANDO Q2 ==============" << endl;
+    int v2_1[] = {5, 1, 5, 2, 5};
+    int tam1 = 0;
+    int* res1 = removeVal(v2_1, 5, 5, &tam1);
+    cout << "Teste 1: ";
+    if(res1) { for(int i=0; i<tam1; i++) cout << res1[i] << " "; delete[] res1; }
+    cout << "| Tam: " << tam1 << " (Esperado: 1 2 | Tam: 2)" << endl;
+
+    int v2_2[] = {1, 2, 3};
+    int tam2 = 0;
+    int* res2 = removeVal(v2_2, 3, 9, &tam2);
+    cout << "Teste 2: ";
+    if(res2) { for(int i=0; i<tam2; i++) cout << res2[i] << " "; delete[] res2; }
+    cout << "| Tam: " << tam2 << " (Esperado: 1 2 3 | Tam: 3)" << endl;
+
+    int v2_3[] = {2, 2, 2};
+    int tam3 = -1;
+    int* res3 = removeVal(v2_3, 3, 2, &tam3);
+    cout << "Teste 3: " << (res3 == NULL ? "NULL" : "ERRO") << " | Tam: " << tam3 << " (Esperado: NULL | Tam: 0)" << endl;
+
+
+    cout << "\n============== TESTANDO Q3 ==============" << endl;
+    cout << "Teste 1 (2^3):  " << pot(2.0, 3) << "   (Esperado: 8)" << endl;
+    cout << "Teste 2 (5^0):  " << pot(5.0, 0) << "   (Esperado: 1)" << endl;
+    cout << "Teste 3 (2^-2): " << pot(2.0, -2) << " (Esperado: 0.25)" << endl;
+
+
+    cout << "\n============== TESTANDO Q4 ==============" << endl;
+    int v4A[] = {10, 20, 30};
+    int v4B[] = {10, 20, 30};
+    cout << "Teste 1: " << iguais(v4A, v4B, 3) << " (Esperado: -1)" << endl;
+
+    int v4C[] = {10, 20, 30};
+    int v4D[] = {10, 99, 30};
+    cout << "Teste 2: " << iguais(v4C, v4D, 3) << "  (Esperado: 1)" << endl;
+
+    int v4E[] = {5};
+    int v4F[] = {4};
+    cout << "Teste 3: " << iguais(v4E, v4F, 1) << "  (Esperado: 0)" << endl;
+
+    return 0;
+}
