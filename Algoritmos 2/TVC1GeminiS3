@@ -1,0 +1,156 @@
+#include <iostream>
+
+using namespace std;
+
+// ========================================================================
+// PROVA SIMULADA 3 - ALGORITMOS II - TVC 1
+// ========================================================================
+
+//Q1
+void calculaEstatisticas(int *vet, int n, int *soma, int *maior) {
+   *soma = 0;
+   *maior = *(vet);
+    for(int i = 0; i < n;i++)
+    {
+        if(*(vet + i) > *maior)
+        {
+            *maior = *(vet + i);
+        }
+        *soma += *(vet+i);
+    }
+
+}
+//-Q1
+
+
+//Q2
+int* intercalaVetor(int v1[], int v2[], int n) {
+    int *vet= new int[2*n];
+    int contador1 = 0;
+    int contador2 = 0;
+    for(int i = 0; i < 2*n;i++)
+    {
+        if(i%2 == 0)
+        {
+            vet[i] = v1[contador1];
+            contador1++;
+        }
+        else{
+            vet[i] = v2[contador2];
+            contador2++;
+        }
+    }
+
+    return vet;
+}
+
+//-Q2
+
+
+//Q3
+int somaIntervalo(int a, int b) {
+    if(a && b == 0)
+    {
+        return 0;
+    }
+    if(a == b)
+    {
+        return a;
+    }
+    if(a < b)
+    {
+    if(a != b)
+        return a + somaIntervalo(a+1,b);
+        else
+            return 0;
+    }else{
+        if(a != b)
+        return b + somaIntervalo(a,b+1);
+        else
+            return 0;
+    }
+}
+//-Q3
+
+
+//Q4
+bool verificaNegativo(int vet[], int n) {
+    if(n == 0 && vet[n] < 0)
+    {
+        return true;
+    }else if(n==0 && vet[n] > 0){
+        return false;
+    }
+    if(vet[n] < 0)
+    {
+        return true;
+    }
+     return verificaNegativo(vet,n-1);
+
+}
+//-Q4
+
+
+// ========================================================================
+// FUNÇÃO MAIN COM MÚLTIPLOS TESTES
+// ========================================================================
+int main() {
+    cout << "============== TESTANDO Q1 ==============" << endl;
+    int v1_1[] = {1, 2, 3, 4, 5};
+    int s1 = 0, m1 = 0;
+    calculaEstatisticas(v1_1, 5, &s1, &m1);
+    cout << "Teste 1: Soma=" << s1 << ", Maior=" << m1 << " | (Esperado: Soma=15, Maior=5)" << endl;
+
+    int v1_2[] = {10, -5, 20, 0};
+    int s2 = 0, m2 = 0;
+    calculaEstatisticas(v1_2, 4, &s2, &m2);
+    cout << "Teste 2: Soma=" << s2 << ", Maior=" << m2 << " | (Esperado: Soma=25, Maior=20)" << endl;
+
+    int v1_3[] = {-1, -5, -3};
+    int s3 = 0, m3 = 0;
+    calculaEstatisticas(v1_3, 3, &s3, &m3);
+    cout << "Teste 3: Soma=" << s3 << ", Maior=" << m3 << " | (Esperado: Soma=-9, Maior=-1)" << endl;
+
+
+    cout << "\n============== TESTANDO Q2 ==============" << endl;
+    int v2A[] = {1, 3};
+    int v2B[] = {2, 4};
+    int* res1 = intercalaVetor(v2A, v2B, 2);
+    cout << "Teste 1: ";
+    if(res1) { for(int i=0; i<4; i++) cout << res1[i] << " "; delete[] res1; }
+    cout << " | (Esperado: 1 2 3 4)" << endl;
+
+    int v2C[] = {10};
+    int v2D[] = {20};
+    int* res2 = intercalaVetor(v2C, v2D, 1);
+    cout << "Teste 2: ";
+    if(res2) { for(int i=0; i<2; i++) cout << res2[i] << " "; delete[] res2; }
+    cout << " | (Esperado: 10 20)" << endl;
+
+    int v2E[] = {0, 0, 0};
+    int v2F[] = {1, 1, 1};
+    int* res3 = intercalaVetor(v2E, v2F, 3);
+    cout << "Teste 3: ";
+    if(res3) { for(int i=0; i<6; i++) cout << res3[i] << " "; delete[] res3; }
+    cout << " | (Esperado: 0 1 0 1 0 1)" << endl;
+
+
+    cout << "\n============== TESTANDO Q3 ==============" << endl;
+    cout << "Teste 1 [1 a 5]:  " << somaIntervalo(1, 5) << "  (Esperado: 15)" << endl;
+    cout << "Teste 2 [5 a 1]:  " << somaIntervalo(5, 1) << "  (Esperado: 15)" << endl;
+    cout << "Teste 3 [7 a 7]:  " << somaIntervalo(7, 7) << "   (Esperado: 7)" << endl;
+    cout << "Teste 4 [-2 a 2]: " << somaIntervalo(-2, 2) << "   (Esperado: 0)" << endl;
+
+
+    cout << "\n============== TESTANDO Q4 ==============" << endl;
+    int v4_1[] = {1, 2, 3, 4};
+    cout << "Teste 1: " << (verificaNegativo(v4_1, 4) ? "true" : "false") << " | (Esperado: false)" << endl;
+
+    int v4_2[] = {5, 6, -1, 8};
+    cout << "Teste 2: " << (verificaNegativo(v4_2, 4) ? "true" : "false") << "  | (Esperado: true)" << endl;
+
+    int v4_3[] = {-10};
+    cout << "Teste 3: " << (verificaNegativo(v4_3, 1) ? "true" : "false") << "  | (Esperado: true)" << endl;
+
+    return 0;
+}
