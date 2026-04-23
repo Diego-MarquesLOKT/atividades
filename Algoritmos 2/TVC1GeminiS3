@@ -49,10 +49,6 @@ int* intercalaVetor(int v1[], int v2[], int n) {
 
 //Q3
 int somaIntervalo(int a, int b) {
-    if(a && b == 0)
-    {
-        return 0;
-    }
     if(a == b)
     {
         return a;
@@ -75,13 +71,11 @@ int somaIntervalo(int a, int b) {
 
 //Q4
 bool verificaNegativo(int vet[], int n) {
-    if(n == 0 && vet[n] < 0)
+    if(n == 0)
     {
-        return true;
-    }else if(n==0 && vet[n] > 0){
         return false;
     }
-    if(vet[n] < 0)
+    if(vet[n-1] < 0)
     {
         return true;
     }
