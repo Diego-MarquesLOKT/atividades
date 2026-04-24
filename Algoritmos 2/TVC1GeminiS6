@@ -1,0 +1,175 @@
+#include <iostream>
+#include <algorithm> // Para usar a funcao min() se quiser na Q4
+
+using namespace std;
+
+// ========================================================================
+// PROVA SIMULADA 6 - ALGORITMOS II - TVC 1
+// ========================================================================
+
+//Q1
+void copiaPositivos(int *origem, int *destino, int n, int *qtd) {
+   *qtd = 0;
+   int c = 0;
+   for(int i = 0; i < n;i++)
+   {
+       if(*(origem + i)> 0)
+       {
+           *(destino + c) = *(origem + i);
+           c++;
+           (*qtd)++;
+       }
+   }
+
+}
+//-Q1
+
+
+//Q2
+int* extraiIndicesPares(int vet[], int n, int *novoTamanho) {
+    *novoTamanho = 0;
+    for(int i = 0; i < n;i++)
+    {
+        if(i%2 == 0)
+        {
+            (*novoTamanho)++;
+        }
+    }
+    int *nvet = new int[*novoTamanho];
+    int c = 0;
+     for(int i = 0; i < n;i++)
+    {
+        if(i%2 == 0)
+        {
+            *(nvet + c) = vet[i];
+            c++;
+        }
+    }
+    return nvet;
+}
+//-Q2
+
+
+//Q3
+// Dica: Crie sua funcao auxiliar recursiva aqui em cima!
+
+bool auxehPrimo(int n, int dig)
+{
+    if(n == 1)
+    {
+        return false;
+    }
+    if(dig == n)
+    {
+        return true;
+    }
+
+        if(n%dig == 0)
+    {
+        return false;
+    }
+            return auxehPrimo(n,dig+1);
+
+}
+
+bool ehPrimo(int n) {
+
+    return auxehPrimo(n,2);
+}
+//-Q3
+
+
+//Q4
+
+/*int auxmenorElemento(int vet[],int n, int menor)
+{
+     if (n==1)
+    {
+        return vet[menor];
+    }
+    if(menor > vet[n-1])
+    {
+        menor = n;
+        return auxmenorElemento(vet,n-1,menor);
+    }else
+        return auxmenorElemento(vet,n-1,menor);
+}
+
+int menorElemento(int vet[], int n) {
+    return auxmenorElemento(vet,n,0);
+}*/
+int menorElemento(int vet[], int n) {
+    // Caso base: Se só tem 1 elemento, ele é o menor!
+    if (n == 1) {
+        return vet[0];
+    }
+
+    // Passo 1: Pega o menor elemento do resto do vetor (mágica da recursão)
+    int menorDoResto = menorElemento(vet, n - 1);
+
+    // Passo 2: O elemento que eu estou olhando agora (n-1) é menor que o do resto?
+    if (vet[n - 1] < menorDoResto) {
+        return vet[n - 1]; // Se for, o meu atual vence
+    } else {
+        return menorDoResto; // Se não, o do resto vence
+    }
+}
+//-Q4
+
+
+// ========================================================================
+// FUNÇÃO MAIN COM MÚLTIPLOS TESTES
+// ========================================================================
+int main() {
+    cout << "============== TESTANDO Q1 ==============" << endl;
+    int v1[] = {10, -5, 0, 20, -3, 30};
+    int dest1[5]; // Espaco garantido
+    int qtd1 = -1;
+    copiaPositivos(v1, dest1, 6, &qtd1);
+    cout << "Teste 1 - Copiados: " << qtd1 << " | Vetor: ";
+    for(int i=0; i<qtd1; i++) cout << dest1[i] << " ";
+    cout << "\n(Esperado  - Copiados: 3 | Vetor: 10 20 30)\n" << endl;
+
+    int v1_B[] = {-1, -2, -3};
+    int dest1_B[6];
+    int qtd1_B = -1;
+    copiaPositivos(v1_B, dest1_B, 3, &qtd1_B);
+    cout << "Teste 2 (Sem positivos) - Copiados: " << qtd1_B << " | Vetor: ";
+    for(int i=0; i<qtd1_B; i++) cout << dest1_B[i] << " ";
+    cout << "\n(Esperado              - Copiados: 0 | Vetor: )\n" << endl;
+
+
+    cout << "============== TESTANDO Q2 ==============" << endl;
+    int v2_A[] = {10, 20, 30, 40, 50}; // Tamanho impar (5)
+    int tam2_A = 0;
+    int* res2_A = extraiIndicesPares(v2_A, 5, &tam2_A);
+    cout << "Teste 1 [tam impar]: ";
+    if(res2_A) { for(int i=0; i<tam2_A; i++) cout << res2_A[i] << " "; delete[] res2_A; }
+    cout << "| Novo Tamanho: " << tam2_A << "\n(Esperado          : 10 30 50 | Novo Tamanho: 3)\n" << endl;
+
+    int v2_B[] = {10, 20, 30, 40}; // Tamanho par (4)
+    int tam2_B = 0;
+    int* res2_B = extraiIndicesPares(v2_B, 4, &tam2_B);
+    cout << "Teste 2 [tam par]:   ";
+    if(res2_B) { for(int i=0; i<tam2_B; i++) cout << res2_B[i] << " "; delete[] res2_B; }
+    cout << "| Novo Tamanho: " << tam2_B << "\n(Esperado          : 10 30    | Novo Tamanho: 2)\n" << endl;
+
+
+    cout << "============== TESTANDO Q3 ==============" << endl;
+    cout << "Teste 1 (n = 17): " << (ehPrimo(17) ? "true" : "false") << "  (Esperado: true)" << endl;
+    cout << "Teste 2 (n = 1):  " << (ehPrimo(1) ? "true" : "false") << " (Esperado: false)" << endl;
+    cout << "Teste 3 (n = 25): " << (ehPrimo(25) ? "true" : "false") << " (Esperado: false)\n" << endl;
+
+
+    cout << "============== TESTANDO Q4 ==============" << endl;
+    int v4_1[] = {15, 8, 30, 4, 12};
+    cout << "Teste 1: " << menorElemento(v4_1, 5) << " (Esperado: 4)" << endl;
+
+    int v4_2[] = {-10, 0, 50};
+    cout << "Teste 2: " << menorElemento(v4_2, 3) << " (Esperado: -10)" << endl;
+
+    int v4_3[] = {7};
+    cout << "Teste 3: " << menorElemento(v4_3, 1) << " (Esperado: 7)" << endl;
+
+    return 0;
+}
