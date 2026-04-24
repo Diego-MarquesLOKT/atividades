@@ -81,15 +81,15 @@ bool ehPrimo(int n) {
 
 //Q4
 
-/*int auxmenorElemento(int vet[],int n, int menor)
+int auxmenorElemento(int vet[],int n, int menor)
 {
      if (n==1)
     {
         return vet[menor];
     }
-    if(menor > vet[n-1])
+    if(vet[menor] > vet[n-1])
     {
-        menor = n;
+        menor = n-1;
         return auxmenorElemento(vet,n-1,menor);
     }else
         return auxmenorElemento(vet,n-1,menor);
@@ -97,22 +97,6 @@ bool ehPrimo(int n) {
 
 int menorElemento(int vet[], int n) {
     return auxmenorElemento(vet,n,0);
-}*/
-int menorElemento(int vet[], int n) {
-    // Caso base: Se só tem 1 elemento, ele é o menor!
-    if (n == 1) {
-        return vet[0];
-    }
-
-    // Passo 1: Pega o menor elemento do resto do vetor (mágica da recursão)
-    int menorDoResto = menorElemento(vet, n - 1);
-
-    // Passo 2: O elemento que eu estou olhando agora (n-1) é menor que o do resto?
-    if (vet[n - 1] < menorDoResto) {
-        return vet[n - 1]; // Se for, o meu atual vence
-    } else {
-        return menorDoResto; // Se não, o do resto vence
-    }
 }
 //-Q4
 
