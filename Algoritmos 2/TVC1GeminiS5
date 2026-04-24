@@ -1,0 +1,170 @@
+#include <iostream>
+
+using namespace std;
+
+// ========================================================================
+// PROVA SIMULADA 5 - ALGORITMOS II - TVC 1
+// ========================================================================
+
+//Q1
+bool analisaVetor(int tam, int *vet, int *par, int *impar, int *negativos) {
+    *par = 0;
+    *impar = 0;
+    *negativos = 0;
+
+    for(int i = 0;i < tam;i++)
+    {
+        if(vet[i]%2 == 0)
+        {
+            (*par)++;
+        }else{
+            (*impar)++;
+        }
+        if(vet[i] < 0)
+        {
+            (*negativos)++;
+        }
+    }
+    if(*negativos > 0)
+    {
+        return true;
+    }else{
+    return false;
+    }
+
+
+}
+//-Q1
+
+
+//Q2
+int* subvetor(int n, int *vet, int inicio, int fim, int *tamSub) {
+    *tamSub = 0;
+    if(inicio > fim)
+    {
+        return NULL;
+    }
+    *tamSub = 1+fim - inicio;
+    int *nvet = new int[*tamSub];
+    int contador = 0;
+    for(int i = inicio; i < fim+1;i++)
+    {
+        *(nvet + contador) = vet[i];
+            contador++;
+        }
+    return nvet;
+}
+//-Q2
+
+
+//Q3
+int contaDigito(int numero, int digito) {
+   if(numero == 0)
+   {
+       return 0;
+   }
+   if(numero%10 == digito)
+   {
+       return 1 + contaDigito(numero/10,digito);
+   }else
+   {
+       return contaDigito(numero/10,digito);
+   }
+
+}
+//-Q3
+
+
+//Q4
+/*void auxindicePares(int *vet,int n, int dig)
+{
+         if(n == 0)
+    {
+        return;
+    }
+    if(dig == n)
+    {
+        return;
+    }
+    if(vet[dig]%2 == 0 )
+    {
+        cout <<dig << " ";
+        return auxindicePares(vet,n,dig+1);
+    }else
+        return  auxindicePares(vet,n,dig+1);
+}
+void indicePares(int* vet, int n) {
+
+   return auxindicePares(vet,n,0);
+}*/
+void indicePares(int* vet, int n) {
+    if (n == 0) {
+        return; // Caso base: vetor acabou
+    }
+
+    // 1º Passo: Chama a recursão ANTES de imprimir.
+    // Isso faz a função ir até o início do vetor primeiro.
+    indicePares(vet, n - 1);
+
+    // 2º Passo: Na "volta" da recursão, ele verifica e imprime.
+    // Como estamos na volta, ele imprimirá do menor (0) para o maior (n-1).
+    if (vet[n - 1] % 2 == 0) {
+        cout << (n - 1) << " ";
+    }
+}
+
+//-Q4
+
+
+// ========================================================================
+// FUNÇÃO MAIN COM MÚLTIPLOS TESTES
+// ========================================================================
+int main() {
+    cout << "============== TESTANDO Q1 ==============" << endl;
+    int v1[] = {2, -3, 4, -5, 0};
+    int p = -1, i = -1, neg = -1; // Inicializados com lixo propositalmente
+    bool temNegativo = analisaVetor(5, v1, &p, &i, &neg);
+    cout << "Teste 1 - Pares: " << p << " | Impares: " << i << " | Negativos: " << neg
+         << " | Retorno: " << (temNegativo ? "true" : "false") << endl;
+    cout << "(Esperado  - Pares: 3 | Impares: 2 | Negativos: 2 | Retorno: true)\n" << endl;
+
+    int v1B[] = {7, 13, 9};
+    temNegativo = analisaVetor(3, v1B, &p, &i, &neg);
+    cout << "Teste 2 - Pares: " << p << " | Impares: " << i << " | Negativos: " << neg
+         << " | Retorno: " << (temNegativo ? "true" : "false") << endl;
+    cout << "(Esperado  - Pares: 0 | Impares: 3 | Negativos: 0 | Retorno: false)\n" << endl;
+
+
+    cout << "============== TESTANDO Q2 ==============" << endl;
+    int v2[] = {10, 20, 30, 40, 50, 60};
+    int tamSub1 = -1;
+    int* res1 = subvetor(6, v2, 1, 3, &tamSub1);
+    cout << "Teste 1 [indices 1 a 3]: ";
+    if(res1) { for(int i=0; i<tamSub1; i++) cout << res1[i] << " "; delete[] res1; }
+    cout << "| Tamanho: " << tamSub1 << " (Esperado: 20 30 40 | Tamanho: 3)" << endl;
+
+    int tamSub2 = -1;
+    int* res2 = subvetor(6, v2, 4, 1, &tamSub2); // Pegadinha: inicio > fim
+    cout << "Teste 2 [inicio > fim]: " << (res2 == NULL ? "NULL" : "ERRO")
+         << " | Tamanho: " << tamSub2 << " (Esperado: NULL | Tamanho: 0)\n" << endl;
+
+
+    cout << "============== TESTANDO Q3 ==============" << endl;
+    cout << "Teste 1 (12322, 2):  " << contaDigito(12322, 2) << " (Esperado: 3)" << endl;
+    cout << "Teste 2 (555, 5):    " << contaDigito(555, 5) << " (Esperado: 3)" << endl;
+    cout << "Teste 3 (987, 1):    " << contaDigito(987, 1) << " (Esperado: 0)\n" << endl;
+
+
+    cout << "============== TESTANDO Q4 ==============" << endl;
+    int v4_1[] = {11, 22, 33, 44};
+    cout << "Teste 1 (Pares em indices): ";
+    indicePares(v4_1, 4);
+    cout << "\n(Esperado: 1 3)\n" << endl;
+
+    int v4_2[] = {10, 20, 30};
+    cout << "Teste 2 (Pares em indices): ";
+    indicePares(v4_2, 3);
+    cout << "\n(Esperado: 0 1 2)\n" << endl;
+
+    return 0;
+}
