@@ -1,0 +1,186 @@
+#include <iostream>
+#include <string.h>
+#include <math.h>
+/// NOME:
+/// MATRÍCULA:
+
+using namespace std;
+
+// ----------------------------------------------------------------------------------------------------
+//Q1
+
+void questao1()
+{
+
+// Letra A
+int x = 10;
+cout << &x << endl;
+
+// Letra B
+int *p;
+cout << &p << endl;
+// Letra C
+ p = &x;
+ cout <<"Endereço de memoria de x " << p <<  endl;
+ cout << "Valor de X " << *p <<endl;
+// Letra D
+*p= 3 ;
+cout << x << endl;
+// Letra E
+ int **z = &p;
+ cout << **z;
+}
+//-Q1
+
+
+
+// ----------------------------------------------------------------------------------------------------
+//Q2
+int* alocaVetor (int n)
+{
+    int *vet = new int[n];
+    return vet;
+}
+
+void drive ()
+{
+    int n = 5;
+    int *vet = alocaVetor(n);
+    *(vet) = -8;
+    *(vet + 1) = 12;
+    *(vet + 2) = 7;
+    *(vet + 3) = 4;
+    *(vet + 4) = 21;
+    for(int i =0 ; i < n; i++)
+    {
+        cout << *(vet + i) << " ";
+    }
+    cout << endl;
+    delete [] vet;
+}
+
+//-Q2
+
+
+// ----------------------------------------------------------------------------------------------------
+//Q3
+
+int fatorial(int n)
+{
+    if(n == 0)
+    {
+        return 1;
+    }
+    return n*fatorial(n-1);
+}
+
+int potencia(int x, int n)
+{
+    if(n == 0)
+    {
+            return 1;
+    }
+    else
+        return  x*potencia(x,n-1);
+}
+
+
+
+float expo(float x, int n)
+{
+  if(n == 0)
+    return 1.0;
+  else
+    return (float)potencia(x,n)/fatorial(n) + expo(x,n-1);
+}
+
+//-Q3
+
+// ----------------------------------------------------------------------------------------------------
+//Q4
+
+bool auxPalindromo(char v1[],int n, int d)
+{
+    if(n == 0)
+    {
+        return true;
+    }
+    if(d == n)
+    {
+        return true;
+    }else
+    if(v1[d] == v1[n-1])
+    {
+    return  auxPalindromo(v1,n-1,d+1);
+    }else{
+        return false;
+    }
+}
+
+
+bool palindromo(char v1[], int n)
+{
+    return auxPalindromo(v1,n,0);
+}
+
+bool palindromo(char v1[].int n)
+{
+    if(n == 0)
+    {
+        return true;
+    }
+    int alg = palindromo(v1,n-1);
+    if(alg == v1[n-1])
+    {
+        return true
+    }
+}
+//-Q4
+
+
+
+// ----------------------------------------------------------------------------------------------------
+int main()
+{
+    // TESTES PARA A QUESTAO 1 ------------------------------------------------
+    cout << "TESTES PARA A QUESTAO 1" << endl;
+    questao1();
+    cout<<endl<<endl;
+    // TESTES PARA A QUESTAO 2 ------------------------------------------------
+    cout << "TESTES PARA A QUESTAO 2" << endl;
+    cout << "Resultado esperado: -8 12 7 4 21"<<endl;
+    drive();
+
+    // TESTES PARA A QUESTAO 3 ------------------------------------------------
+    cout << "TESTES PARA A QUESTAO 3" << endl;
+    cout << "Resultado esperado: "<<1 << endl;
+    cout << "Resultado obtido:   ";
+    cout<<expo(0.0, 9)<<endl;
+
+    cout << "Resultado esperado: "<<2.5 << endl;
+    cout << "Resultado obtido:   ";
+    cout<<expo(1.0, 2)<<endl;
+
+    cout << "Resultado esperado: "<<5 << endl;
+    cout << "Resultado obtido:   ";
+    cout<<expo(2.0, 2)<<endl;
+
+
+    // ------------------------------------------------------------------------
+    cout << endl << endl;
+
+    // TESTES PARA A QUESTAO 4 ------------------------------------------------
+    cout << "TESTES PARA A QUESTAO 4" << endl;
+
+    char v[] = "Minas Gerais";
+    cout << "Resuldado esperado: "<<0<< endl;
+    cout << "Resuldado obtido:   "<<palindromo(v,strlen(v))<< endl;
+
+    cout << endl;
+    char v1[] = "socorram me subino onibus em marrocos";
+    cout << "Resuldado esperado: "<<1<< endl;
+    cout << "Resuldado obtido:   "<<palindromo(v1,strlen(v1))<< endl;
+
+        // ------------------------------------------------------------------------
+    return 0;
+}
