@@ -1,0 +1,38 @@
+#include <iostream>
+
+using namespace std;
+
+void imprimeSemRepeticao(int vet[], int n)
+{
+    bool existe;
+    for(int i = 0;i < n;i++)//n-1
+    {
+        existe = false;
+        for(int j = 0; j < i;j++)
+        {
+            if(vet[j]==vet[i])
+            {
+                existe = true;
+            }
+        }
+        if(!existe)
+        {
+            cout << vet[i] << " ";
+    }
+}
+
+}
+
+int main()
+{
+    int n;//1
+    cin >> n;//1
+    int vet[n];//1
+    for (int i = 0; i < n;i++)
+    {
+        cin >> vet[i];
+    }
+    imprimeSemRepeticao(vet,n);
+
+    return 0;
+ }
