@@ -1,0 +1,64 @@
+#include <iostream>
+
+using namespace std;
+
+// ========================================================================
+// SIMULADO 1 - ALGORITMOS II - TVC 2
+// ========================================================================
+
+//Q1
+
+
+void merge(int vet[], int esq, int meio, int dir) {
+   int i = esq, j = meio+1, k = 0;
+   int aux[dir - esq + 1];
+
+   while (i<= meio && j<=dir){
+        aux[k++] = (vet[i] <= vet[j]) ? vet[i++] : vet[j++];
+   }
+   while(i <=meio){
+    aux[k++]=vet[i++];
+   }
+   while(j<=dir)
+   {
+       aux[k++]=vet[j++];
+   }
+   for(i = esq,k=0;i<=dir;i++,k++)
+   {
+       vet[i]=aux[k];
+   }
+
+}
+void mergeSort(int v[],int e, int d)
+{
+    if(e < d)
+    {
+        int m = (e+d)/2;
+        mergeSort(v,e,m);
+        mergeSort(v,m+1,d);
+        merge(v,e,m,d);
+    }
+}
+//-Q1
+
+int main() {
+    cout << "============== TESTANDO Q1 (MERGE) ==============" << endl;
+
+    // Teste 1: Duas metades ordenadas [21-23] e [24-26]
+    int v1[] = {1, 5, 9, 2, 4, 8};
+    merge(v1, 0, 2, 5);
+
+    cout << "Teste 1: ";
+    for(int i=0; i<6; i++) cout << v1[i] << " ";
+    cout << "\n(Esperado: 1 2 4 5 8 9)\n\n";
+
+    // Teste 2: Metades de tamanhos diferentes [5, 13, 27] e [22, 28]
+    int v2[] = {10, 20, 30, 5, 15};
+    merge(v2, 0, 2, 4);
+
+    cout << "Teste 2: ";
+    for(int i=0; i<5; i++) cout << v2[i] << " ";
+    cout << "\n(Esperado: 5 10 15 20 30)\n\n";
+
+    return 0;
+}
