@@ -1,0 +1,66 @@
+#include <iostream>
+
+using namespace std;
+
+int* intercala(int v1[], int v2[], int n1, int n2)
+{
+    int n3 = n1 + n2;
+    int *v3 = new int[n3];
+    int j = 0;
+    int k = 0;
+    int i = 0;
+    while(j < n1 && k < n2){
+        if(v1[j] <= v2[k])
+        {
+            v3[i] = v1[j];
+            j++;
+        }
+        else{
+        v3[i] = v2[k];
+        k++;
+        }
+
+        i++;
+    }
+    while(j < n1)
+    {
+            v3[i] = v1[j];
+            j++;
+            i++;
+    }
+    while(k < n2)
+    {
+            v3[i] = v2[k];
+            k++;
+            i++;
+    }
+    return v3;
+    delete [] v3;
+}
+
+
+int main()
+{
+    int n1,n2;
+    cout << "Tamanhos (1 e 2 respectivamente) : " << endl;
+    cin >> n1;
+    cin >> n2;
+    int v1[n1];
+    int v2[n2];
+    cout << "Valores do vetor 1: " << endl;
+    for(int i = 0; i < n1;i++)
+    {
+        cin >> v1[i];
+    }
+    cout << "Valores do vetor 2: " << endl;
+    for(int i = 0; i < n2;i++)
+    {
+        cin >> v2[i];
+    }
+    int *algo = intercala(v1,v2,n1,n2);
+      for(int i = 0; i < n1 + n2;i++)
+    {
+    cout << *(algo + i) << " ";
+    }
+    return 0;
+}
