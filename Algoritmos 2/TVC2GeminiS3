@@ -1,0 +1,43 @@
+// ========================================================================
+// SIMULADO 3 - ALGORITMOS II - TVC 2
+// ========================================================================
+#include <iostream>
+using namespace std;
+//Q1
+void insertionSort(int vet[], int n) {
+    for(int j =1; j < n;j++)
+    {
+        int pivo = vet[j];
+        int i = j -1;
+        while(i >= 0 && vet[i] > pivo)
+        {
+            vet[i+1] = vet[i];
+            i = i-1;
+        }
+        vet[i+1] = pivo;
+    }
+
+}
+//-Q1
+
+int main() {
+    cout << "============== TESTANDO Q1 (INSERTION SORT) ==============" << endl;
+
+    // Teste 1: Vetor desordenado comum
+    int v1[] = {15, 8, 30, 4, 12};
+    insertionSort(v1, 5);
+
+    cout << "Teste 1: ";
+    for(int i=0; i<5; i++) cout << v1[i] << " ";
+    cout << "\n(Esperado: 4 8 12 15 30)\n\n";
+
+    // Teste 2: Vetor quase ordenado
+    int v2[] = {1, 2, 3, 5, 4, 6};
+    insertionSort(v2, 6);
+
+    cout << "Teste 2: ";
+    for(int i=0; i<6; i++) cout << v2[i] << " ";
+    cout << "\n(Esperado: 1 2 3 4 5 6)\n\n";
+
+    return 0;
+}
