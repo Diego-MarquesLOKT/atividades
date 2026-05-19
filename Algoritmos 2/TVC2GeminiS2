@@ -1,0 +1,52 @@
+#include <iostream>
+
+using namespace std;
+
+// ========================================================================
+// SIMULADO 2 - ALGORITMOS II - TVC 2
+// ========================================================================
+
+void troca(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+//Q1
+void selectionSort(int vet[], int n) {
+    for(int i =0; i < n-1;i++)
+    {
+        int min = i;
+    for(int j = i+1; j < n; j++)
+    {
+    if(vet[j] < vet[min])
+    min = j;
+    }
+    troca(&vet[i], &vet[min]);
+    }
+
+}
+
+//-Q1
+
+int main() {
+    cout << "============== TESTANDO Q1 (SELECTION SORT) ==============" << endl;
+
+    // Teste 1: Vetor desordenado comum
+    int v1[] = {15, 8, 30, 4, 12};
+    selectionSort(v1, 5);
+
+    cout << "Teste 1: ";
+    for(int i=0; i<5; i++) cout << v1[i] << " ";
+    cout << "\n(Esperado: 4 8 12 15 30)\n\n";
+
+    // Teste 2: Vetor com elementos repetidos e negativos
+    int v2[] = {9, -2, 5, 9, 1, 0};
+    selectionSort(v2, 6);
+
+    cout << "Teste 2: ";
+    for(int i=0; i<6; i++) cout << v2[i] << " ";
+    cout << "\n(Esperado: -2 0 1 5 9 9)\n\n";
+
+    return 0;
+}
