@@ -1,0 +1,76 @@
+#include 
+
+
+using namespace std;
+
+
+// ========================================================================
+// SIMULADO 4 - ALGORITMOS II - TVC 2
+// ========================================================================
+
+
+void troca(int *a, int *b) {
+int temp = *a;
+*a = *b;
+*b = temp;
+}
+
+
+//Q1
+int particionamento(int vet[], int esq, int dir) {
+int meio = (esq + dir)/2;
+troca(&vet[meio],&vet[esq]);
+int i = esq;
+for(int j = esq +1; j <= dir;j++)
+{
+if(vet[j] < vet[esq])
+{
+i++;
+troca(&vet[i],&vet[j]);
+}
+
+
+}
+troca(&vet[esq],&vet[i]);
+
+return i; // modifique o retorno
+
+}
+
+
+void quickSort(int vet[], int esq, int dir) {
+if(esq < dir)
+{
+int p = particionamento(vet,esq,dir);
+quickSort(vet,esq,p-1);
+quickSort(vet,p+1,dir);
+}
+
+
+}
+//-Q1
+
+
+int main() {
+cout << "============== TESTANDO Q1 (QUICK SORT) ==============" << endl;
+
+
+// Teste 1: Vetor desordenado padrao
+int v1[] = {6, 2, 9, 1, 5, 3, 8};
+quickSort(v1, 0, 6);
+
+cout << "Teste 1: ";
+for(int i=0; i<7; i++) cout << v1[i] << " ";
+cout << "\n(Esperado: 1 2 3 5 6 8 9)\n\n";
+
+// Teste 2: Vetor com elementos repetidos e negativos
+int v2[] = {10, -5, 3, 3, -1, 8};
+quickSort(v2, 0, 5);
+
+cout << "Teste 2: ";
+for(int i=0; i<6; i++) cout << v2[i] << " ";
+cout << "\n(Esperado: -5 -1 3 3 8 10)\n\n";
+
+return 0;
+
+}
